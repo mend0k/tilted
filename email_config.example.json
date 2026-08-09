@@ -1,0 +1,10 @@
+{
+  "_instructions": "Fill in your SMTP details. For Gmail: smtp.gmail.com, port 587, and create an App Password at https://myaccount.google.com/apppasswords (do NOT use your real password). For Outlook/Office365: smtp.office365.com, port 587. Leave password empty here if you set the TILTED_SMTP_PASSWORD environment variable instead.",
+  "smtp_host": "",
+  "smtp_port": 587,
+  "username": "",
+  "password": "",
+  "from_addr": "",
+  "to_addrs": ["favoriteday09@gmail.com"],
+  "subject_prefix": "[Tilted] Pre-Order Report"
+}

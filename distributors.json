@@ -1,0 +1,70 @@
+{
+  "distributors": [
+    {
+      "key": "phd",
+      "name": "PHD",
+      "website": "https://www.phdgames.com",
+      "portal": "https://portal.phdgames.com",
+      "account": false,
+      "automation": "working",
+      "method": "Public JSON API (api.phdgames.com FilterProducts, no auth). Filtered to Pre-Orders Due + Trading Card Games.",
+      "scraper": "scrapers/phd.py",
+      "disabled": false
+    },
+    {
+      "key": "gts",
+      "name": "GTS Distribution",
+      "website": "https://www.gtsdistribution.com",
+      "portal": "https://www.gtsdistribution.com (catalog public, prices included)",
+      "account": false,
+      "automation": "working",
+      "method": "Public CSV export: pc_combined_results.asp with downloadsearch=1 dumps all matching rows (name, sku, wholesale cust_price, SRP, release_date, order_due_date, per-warehouse stock, UPCs). Card Games facet key 04552AD14A72447B95ECFC368E1CB6BD. We filter order_due_date >= today.",
+      "scraper": "scrapers/gts.py",
+      "disabled": false
+    },
+    {
+      "key": "magx",
+      "name": "MagX",
+      "website": null,
+      "portal": null,
+      "account": false,
+      "automation": "blocked",
+      "method": "Site URL unknown \u2014 could not find a distributor named MagX publicly. Need URL from Kevin.",
+      "scraper": null,
+      "disabled": true
+    },
+    {
+      "key": "acdd",
+      "name": "ACD Distribution",
+      "website": "https://www.acdd.com",
+      "portal": "https://www.acdd.com (marketing site IS the catalog)",
+      "account": false,
+      "automation": "feasible",
+      "method": "Public Next.js/BigCommerce site. No anonymous JSON API; data (name, sku, upc, MSRP price, release_date, order_by_date, is_preorder) is embedded in each page's RSC HTML chunks. Preorders at /pre-order; TCG at /products/collectible-card-games/. Scrape = fetch pages with Mozilla UA + parse RSC. robots.txt allows product/category paths, disallows query-string URLs. Wholesale pricing requires login.",
+      "scraper": null,
+      "disabled": true
+    },
+    {
+      "key": "southern",
+      "name": "Southern Hobby Supply",
+      "website": "https://www.southernhobby.com",
+      "portal": "https://www.southernhobby.com (storefront is public)",
+      "account": false,
+      "automation": "feasible",
+      "method": "Server-rendered PHP storefront, trivially parseable HTML tables. Logged out: name, SKU, release date, Order Due (preorder deadline). Prices hidden behind dealer login. CCG category /ccg-s/c13/ with ~25 game subcats, ?page=N pagination (40/page). Note: the site's preorder search URL (advanced_search_result.php) is disallowed by robots.txt \u2014 compliant path is crawling allowed category pages and reading each product's Order Due/pre-sell flag.",
+      "scraper": null,
+      "disabled": true
+    },
+    {
+      "key": "universal",
+      "name": "Universal Distribution",
+      "website": "https://universaldistribution.ca",
+      "portal": "https://ca.universaldist.com (CA) / https://us.universaldist.com (US)",
+      "account": false,
+      "automation": "working",
+      "method": "Public JSON API /api/v1/en/preorderproducts?limit=500 (grouped by category; TCG = 2000-series codes). Fields: productName, itemCode, UPC, manufacturer, releaseDate, customerOrderDue. Pricing requires dealer login (blank in report).",
+      "scraper": "scrapers/universal.py",
+      "disabled": true
+    }
+  ]
+}

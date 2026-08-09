@@ -1,0 +1,13 @@
+# Excel lock files
+~$*
+
+# Python
+__pycache__/
+*.pyc
+
+# Local-only Claude settings
+.claude/settings.local.json
+
+# SMTP credentials live here — never committed.
+# Copy email_config.example.json to email_config.json and fill it in.
+email_config.json
