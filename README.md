@@ -43,6 +43,62 @@ it can send email (Gmail needs an App Password — instructions are inside
 the file). `email_config.json` is git-ignored, so your SMTP details never
 leave the machine.
 
+On a fresh clone there is no `preorder_report.xlsx` yet — the first run
+creates it. The workbook is git-ignored, so **your Qty Added history stays
+on the machine that ran it** and doesn't travel with the repo.
+
+## Example prompts
+
+The skill handles the whole run, so `/start-preorder` alone is enough. Add
+a sentence when you want to deviate from the defaults:
+
+**Standard run — everything enabled, quantity 3 each:**
+
+> /start-preorder
+
+**Spell out the quantity explicitly** (matches `DEFAULT_QTY = 3`; the agent
+follows your prompt over the default if you name a different number):
+
+> /start-preorder — pull the current pre-orders due for the enabled sites,
+> add 3 of each item to the cart, record what actually landed in the
+> workbook, and email me the summary. Stop at the cart; don't check out.
+
+**One site only:**
+
+> Start the preorder run for PHD only — skip GTS this time.
+
+**Different quantity for this run, without editing the rules file:**
+
+> Start the preorder run, but use 2 of each item instead of 3.
+
+**Selective carting:**
+
+> Start the preorder run, but only cart MTG and Pokémon items — skip
+> everything else, and tell me what you skipped.
+
+**Deadline-driven:**
+
+> Start the preorder run, but only items whose pre-order date is within the
+> next 7 days.
+
+**Dry look before committing to anything:**
+
+> Refresh the pre-order data and show me the summary, but don't cart
+> anything yet.
+
+**Email only, no new data pull:**
+
+> /send-report
+
+**Preview the email without sending:**
+
+> Show me what the report email would say, but don't send it.
+
+Useful things to mention in a prompt when they apply: which sites, what
+quantity, any category/deadline filter, and whether to email or just
+report back. If a site needs a login, the agent will pause and ask you —
+it never enters credentials itself.
+
 ## How the agent behaves (guardrails)
 
 Baked into `CLAUDE.md` and the skills:
@@ -100,7 +156,7 @@ record_qty.py           record one carted qty: record_qty.py "<sheet>" <SKU> <qt
 send_report.py          email the workbook (--dry-run to preview)
 email_config.example.json  SMTP template — copy to email_config.json (git-ignored) and fill in
 scrapers/               per-distributor data fetchers
-preorder_report.xlsx    THE order sheet (generated; your Qty Added persists)
+preorder_report.xlsx    THE order sheet (generated, git-ignored; Qty Added persists locally)
 dashboard.py            optional local web UI from the app phase:
                         python3 dashboard.py → http://localhost:8377
 ```

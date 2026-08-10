@@ -11,3 +11,8 @@ __pycache__/
 # SMTP credentials live here — never committed.
 # Copy email_config.example.json to email_config.json and fill it in.
 email_config.json
+
+# Generated output — build_report.py recreates these.
+# Kept out of git so the binary workbook never merge-conflicts across machines.
+preorder_report.xlsx
+report_summary.json
