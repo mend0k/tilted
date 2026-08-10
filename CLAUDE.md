@@ -42,8 +42,6 @@ The user starts this with **/start-preorder** (see `.claude/skills/`).
   copy from `email_config.example.json`).
 - `order_rules.py` — quantity logic. Edit only when the user asks.
 - `scrapers/` — one module per automated distributor (phd, gts, universal).
-- `dashboard.py` — optional local web UI (legacy from the app phase; the
-  agent flow does not need it).
 
 ## Distributor notes (as of Aug 2026)
 

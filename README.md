@@ -313,9 +313,10 @@ email_config.example.json  SMTP template — copy to email_config.json (git-igno
 requirements.txt        the one dependency; the agent installs it automatically
 scrapers/               per-distributor data fetchers
 preorder_report.xlsx    THE order sheet (generated, git-ignored; Qty Added persists locally)
-dashboard.py            optional local web UI from the app phase:
-                        python3 dashboard.py → http://localhost:8377
 ```
+
+Every file here is either read by the agent (the markdown, `distributors.json`)
+or run by it (the scripts). There's nothing optional to ignore.
 
 ## Scripts without the agent
 

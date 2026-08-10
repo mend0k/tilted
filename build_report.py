@@ -1,9 +1,9 @@
 """Build the multi-distributor pre-order workbook.
 
-One tab per distributor (every registered site gets a tab even if its
-scraper isn't built yet), an Order Qty column from order_rules, and a
-Summary sheet. Also writes report_summary.json for the email body and
-dashboard.
+One tab per enabled distributor (a site whose scraper isn't built yet gets
+a tab with a note), Suggested Qty from order_rules, a user-owned Qty Added
+column preserved across rebuilds, and a Summary sheet. Also writes
+report_summary.json for the email body.
 
 Usage:  python3 build_report.py
 """
