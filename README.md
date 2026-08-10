@@ -38,20 +38,17 @@ git clone https://github.com/mend0k/tilted.git
 
 Or copy the folder by hand. Any location is fine.
 
-### 3. Check Python and install the one dependency
+### 3. Make sure Python exists
 
 macOS and Linux already have Python 3.9+. On Windows, install it from
 [python.org](https://www.python.org/downloads/) and check "Add Python to
 PATH" during setup.
 
-```bash
-pip3 install openpyxl
-```
-
-Verify it worked — this should print a version, not an error:
+You don't need to install any packages — **the agent installs its own
+dependency** (`openpyxl`) on the first run. If you'd rather do it yourself:
 
 ```bash
-python3 -c "import openpyxl; print(openpyxl.__version__)"
+pip3 install -r requirements.txt
 ```
 
 ### 4. Open the folder as your session's working directory
@@ -113,9 +110,9 @@ See [Example prompts](#example-prompts) below for variations.
 
 ### What happens, in order
 
-1. **Data refresh** — the agent runs `build_report.py`, which pulls current
-   pre-orders due from each enabled distributor and rebuilds the workbook.
-   Takes a few seconds.
+1. **Preflight + data refresh** — the agent installs `openpyxl` if it's
+   missing, then runs `build_report.py`, which pulls current pre-orders due
+   from each enabled distributor and rebuilds the workbook. A few seconds.
 2. **Carting** — it opens each distributor site in the browser, finds items
    by SKU, sets quantities, and adds them to the cart. If a site needs a
    login it **pauses and asks you to log in yourself** — it never types
@@ -313,6 +310,7 @@ build_report.py         pull data → rebuild preorder_report.xlsx
 record_qty.py           record one carted qty: record_qty.py "<sheet>" <SKU> <qty>
 send_report.py          email the workbook (--dry-run to preview)
 email_config.example.json  SMTP template — copy to email_config.json (git-ignored) and fill in
+requirements.txt        the one dependency; the agent installs it automatically
 scrapers/               per-distributor data fetchers
 preorder_report.xlsx    THE order sheet (generated, git-ignored; Qty Added persists locally)
 dashboard.py            optional local web UI from the app phase:
@@ -336,7 +334,9 @@ python3 send_report.py --dry-run
 - **`/start-preorder` not recognized** — the session's working directory
   isn't this folder (skills live in `.claude/skills/`). Point it here and
   start a new session; type `/` to confirm the skills are listed.
-- **`ModuleNotFoundError: openpyxl`** — run `pip3 install openpyxl`.
+- **`ModuleNotFoundError: openpyxl`** — the agent normally installs this
+  itself; if you hit it running a script by hand, use
+  `pip3 install -r requirements.txt`.
 - **Gmail rejects login** — use an App Password, which requires 2-step
   verification on the Google account. A regular password will not work.
 - **`email_config.json is missing: ...`** — copy

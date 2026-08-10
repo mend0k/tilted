@@ -13,7 +13,7 @@ SCRAPERS = {
     "phd": phd.fetch_preorders,
     "gts": gts.fetch_preorders,
     "universal": universal.fetch_preorders,
-    # "magx": ...,     need site URL from Kevin
+    # "magx": ...,     need site URL from the user
     # "acdd": ...,     feasible — RSC HTML parsing, next iteration
     # "southern": ..., feasible — category-page HTML parsing, next iteration
 }

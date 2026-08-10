@@ -5,6 +5,6 @@
   "username": "",
   "password": "",
   "from_addr": "",
-  "to_addrs": ["favoriteday09@gmail.com"],
+  "to_addrs": ["you@example.com"],
   "subject_prefix": "[Tilted] Pre-Order Report"
 }

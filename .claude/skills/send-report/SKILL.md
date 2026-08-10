@@ -5,6 +5,12 @@ description: Build (or reuse) the pre-order workbook and email it with a summary
 
 # Send the Pre-Order Report
 
+0. Preflight (no-op if already installed — don't ask the user to do this):
+
+   ```bash
+   python3 -c "import openpyxl" 2>/dev/null || pip3 install -r requirements.txt
+   ```
+
 1. Unless the user says the current workbook is fine, refresh it first:
    `python3 build_report.py` (preserves Qty Added).
 2. Preview: `python3 send_report.py --dry-run --no-build` — show the user

@@ -29,7 +29,7 @@
       "portal": null,
       "account": false,
       "automation": "blocked",
-      "method": "Site URL unknown \u2014 could not find a distributor named MagX publicly. Need URL from Kevin.",
+      "method": "Site URL unknown \u2014 could not find a distributor named MagX publicly. Ask the user for the URL.",
       "scraper": null,
       "disabled": true
     },

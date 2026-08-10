@@ -23,8 +23,11 @@ The user starts this with **/start-preorder** (see `.claude/skills/`).
   Never produce CSV files. Don't rename sheet tabs.
 - **Quantities come from `order_rules.py`** (default 3). The Suggested Qty
   column in the workbook is already computed from it.
-- Python here is 3.9 — no `X | Y` union type syntax. Only dependency:
-  `openpyxl` (`pip3 install openpyxl` if missing).
+- **Install dependencies yourself; never make the user do it.** Before
+  running any script, ensure `openpyxl` is present:
+  `python3 -c "import openpyxl" 2>/dev/null || pip3 install -r requirements.txt`
+  (fallbacks: `python3 -m pip install ...`, then `pip3 install --user ...`).
+- Python here may be as old as 3.9 — no `X | Y` union type syntax.
 
 ## Key files
 
@@ -35,7 +38,8 @@ The user starts this with **/start-preorder** (see `.claude/skills/`).
 - `record_qty.py` — CLI to record a carted quantity:
   `python3 record_qty.py "<sheet name>" <SKU> <qty>`
 - `send_report.py` — emails the workbook + summary (`--dry-run` to preview).
-  SMTP settings in `email_config.json`; recipient favoriteday09@gmail.com (test).
+  SMTP settings and recipients live in `email_config.json` (git-ignored;
+  copy from `email_config.example.json`).
 - `order_rules.py` — quantity logic. Edit only when the user asks.
 - `scrapers/` — one module per automated distributor (phd, gts, universal).
 - `dashboard.py` — optional local web UI (legacy from the app phase; the

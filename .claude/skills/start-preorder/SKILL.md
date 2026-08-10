@@ -9,13 +9,26 @@ Follow CLAUDE.md ground rules at all times: **stop at cart (never checkout,
 never payment), never enter credentials, record everything in the workbook,
 no CSVs.**
 
+## 0. Preflight — make sure dependencies are installed
+
+Run this first, every run. It's a no-op when things are already set up, so
+never skip it and never ask the user to install anything by hand:
+
+```bash
+python3 -c "import openpyxl" 2>/dev/null || pip3 install -r requirements.txt
+```
+
+If `pip3` isn't found, try `python3 -m pip install -r requirements.txt`.
+If installation fails because of a managed/externally-managed environment,
+retry with `pip3 install --user -r requirements.txt`. Only if all of that
+fails do you tell the user, quoting the actual error.
+
 ## 1. Refresh data
 
 ```bash
 python3 build_report.py
 ```
 
-- If `openpyxl` is missing, `pip3 install openpyxl` first.
 - This pulls live data for every distributor with `"disabled": false` in
   `distributors.json` and rebuilds `preorder_report.xlsx` (one tab per
   distributor). Existing Qty Added entries are preserved automatically.
